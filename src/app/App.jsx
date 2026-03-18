@@ -81,6 +81,9 @@ export default function App() {
           <Route path="/myvocab" element={<MyVocab />} />
           <Route path="/template" element={<Template />} />
 
+          {/* ADMIN */}
+          <Route path="/admin-writing" element={<AdminWriting />} />
+
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
