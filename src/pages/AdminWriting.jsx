@@ -6,7 +6,7 @@ export default function AdminWriting() {
 
   useEffect(() => {
     fetch("/.netlify/functions/get-writing")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setData);
   }, []);
 
@@ -14,7 +14,7 @@ export default function AdminWriting() {
     <Container>
       <Title>✍️ Writing Submissions</Title>
 
-      {data.map(item => (
+      {data.map((item) => (
         <Card key={item.id}>
           <Name>{item.name}</Name>
           <Answer>{item.answer}</Answer>

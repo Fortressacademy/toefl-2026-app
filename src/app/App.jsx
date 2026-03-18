@@ -3,6 +3,7 @@ import AppShell from "../layout/AppShell";
 import RouteReset from "../layout/RouteReset";
 
 import Home from "../pages/Home";
+import AdminWriting from "../pages/AdminWriting";
 
 // Reading
 import Reading from "../pages/Reading";
