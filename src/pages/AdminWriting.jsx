@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function AdminWriting() {
   const [data, setData] = useState([]);
+  const nav = useNavigate();
 
   useEffect(() => {
     fetch("/.netlify/functions/get-writing")
@@ -12,12 +14,14 @@ export default function AdminWriting() {
 
   return (
     <Container>
-      <Title>✍️ Writing Submissions</Title>
+      <Title>✍️ Writing Reports</Title>
 
       {data.map((item) => (
-        <Card key={item.id}>
-          <Name>{item.name}</Name>
-          <Answer>{item.answer}</Answer>
+        <Card key={item.id} onClick={() => nav(`/admin-writing/${item.id}`)}>
+          <Name>{item.studentName}</Name>
+          <Code>학생코드: {item.studentCode}</Code>
+          <Meta>{item.report?.title || item.mockId}</Meta>
+          <Meta>{new Date(item.submittedAt).toLocaleString()}</Meta>
         </Card>
       ))}
     </Container>
@@ -37,12 +41,25 @@ const Card = styled.div`
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 12px;
+  cursor: pointer;
+  background: #fff;
+
+  &:hover {
+    background: #f8fafc;
+  }
 `;
 
 const Name = styled.h3`
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 `;
 
-const Answer = styled.p`
-  white-space: pre-wrap;
+const Code = styled.p`
+  margin-bottom: 6px;
+  color: #666;
+`;
+
+const Meta = styled.p`
+  margin: 0;
+  color: #888;
+  font-size: 14px;
 `;

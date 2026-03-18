@@ -2,30 +2,30 @@ import { getStore } from "@netlify/blobs";
 
 const SITE_ID = "6f0f75e9-0113-4270-9345-69d9d3be5601";
 
-export async function handler() {
+export async function handler(event) {
   try {
     const token = process.env.NETLIFY_AUTH_TOKEN;
     if (!token) throw new Error("NETLIFY_AUTH_TOKEN is missing");
+
+    const id = event.queryStringParameters?.id;
+    if (!id) throw new Error("id is required");
 
     const store = getStore("writing-submissions", {
       siteID: SITE_ID,
       token,
     });
 
-    const { blobs } = await store.list();
-    const results = [];
-
-    for (const blob of blobs) {
-      const raw = await store.get(blob.key, { type: "text" });
-      const data = JSON.parse(raw);
-      results.push(data);
+    const raw = await store.get(id, { type: "text" });
+    if (!raw) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ error: "Not found" }),
+      };
     }
-
-    results.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
 
     return {
       statusCode: 200,
-      body: JSON.stringify(results),
+      body: raw,
     };
   } catch (err) {
     return {

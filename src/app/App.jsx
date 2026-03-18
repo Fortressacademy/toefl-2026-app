@@ -4,6 +4,7 @@ import RouteReset from "../layout/RouteReset";
 
 import Home from "../pages/Home";
 import AdminWriting from "../pages/AdminWriting";
+import AdminWritingDetail from "../pages/AdminWritingDetail";
 
 // Reading
 import Reading from "../pages/Reading";
@@ -84,6 +85,7 @@ export default function App() {
 
           {/* ADMIN */}
           <Route path="/admin-writing" element={<AdminWriting />} />
+          <Route path="/admin-writing/:id" element={<AdminWritingDetail />} />
 
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
