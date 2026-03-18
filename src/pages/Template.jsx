@@ -1,0 +1,1 @@
+export default function Reading(){ return <div style={{padding:16}}>Reading</div>; }
