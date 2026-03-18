@@ -1153,7 +1153,7 @@ const ResumeGhost = styled.button`
 
 const ResumePrimary = styled.button`
   height: 46px;
-  border-radius: 14px;
+  border-radius: 14px;s
   border: none;
   background: linear-gradient(135deg, #1e88ff, #0055ff);
   color: white;
